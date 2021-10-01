@@ -1,0 +1,48 @@
+--------------------------------
+GRAMÁTICA:
+
+E -> E+T | E-T | T
+T -> T*F | T/F | F
+F -> -N  | P
+P -> numS| (E)
+N -> (E) | U
+U -> -U  | numS
+S -> numS| \epsilon
+--------------------------------
+Eliminación de recursión
+por la izquierda:
+
+E -> TE'
+E'-> +TE' | -TE' | e
+T -> FT'
+T'-> *FT' | /FT' | e
+F -> -N   | P
+P -> numS | (E)
+N -> (E)  | U
+U -> -U   | numS
+S -> numS | \epsilon
+--------------------------------
+Función First:
+
+First(E) = {num, (, -}
+First(E')= {+, - , e}
+First(T) = {num, (, -}
+First(T')= {*, /, e}
+First(F) = {num, (, -}
+First(P) = {num, (}
+First(N) = {num, (, -}
+First(U) = {num, -}
+First(S) = {num, e}
+--------------------------------
+Función Follow:
+
+Follow(E) = {$, )}
+Follow(E')= {$, )}
+Follow(T) = {+, -, $, )}
+Follow(T')= {+, -, $, )}
+Follow(F) = {+, -, $, ), *, /}
+Follow(P) = {+, -, $, ), *, /}
+Follow(N) = {+, -, $, ), *, /}
+Follow(U) = {+, -, $, ), *, /}
+Follow(S) = {+, -, $, ), *, /}
+--------------------------------
